@@ -1,7 +1,9 @@
 from Model import WheelSpinner
 
+aasdlfkj
 
-class Character:
+
+class Character;
     wheel = WheelSpinner
 
     def __init__(self):
