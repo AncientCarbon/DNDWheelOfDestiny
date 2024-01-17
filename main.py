@@ -1,7 +1,4 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import tkinter as tk
 
 
 def print_hi(name):
@@ -10,12 +7,55 @@ def print_hi(name):
 
 
 # Press the green button in the gutter to run the script.
-def testFun():
-    return "Hello!", 1
+
+class Character:
+    def __init__(self):
+        # TODO: Code layout
+        pass
+
+    def assignAttribute(self):
+        # TODO: make the logic
+        pass
+
+    def updateAttribute(self, attribute, value):
+        # TODO: updates
+        pass
+
+
+class WheelSpinner:
+    def __init__(self):
+        # Initialize attributes
+        pass
+
+    def spin(self):
+        # logic
+        pass
+
+
+class GUIController:
+    def __init__(self, master):
+        # TODO: Setup layout (buttons, labels, canvas etc)
+        pass
+
+    def update(self):
+        # TODO: Update
+        pass
+
+
+class CharacterCreatorApp:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.character = Character()
+        self.wheelSpinner = WheelSpinner()
+        self.gui = GUIController(self.root)
+
+        # Setup interactions
+        pass
+
+    def run(self):
+        self.root.mainloop()
 
 
 if __name__ == '__main__':
-    payload, integer = testFun()
-
-
-
+    app = CharacterCreatorApp
+    app.run()
