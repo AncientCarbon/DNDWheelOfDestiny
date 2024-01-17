@@ -1,7 +1,8 @@
 class WheelSpinner:
-    def __init__(self):
+    def __init__(self, SpinType):
+        spinType = SpinType
         pass
 
-    def spin(self, ):
+    def spin(self, spinType):
 
         pass

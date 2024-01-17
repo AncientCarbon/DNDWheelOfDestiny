@@ -1,7 +1,11 @@
-from Model import CharacterCreatorApp
+from Model.CharacterCreatorApp import CharacterCreatorApp
 
-if __name__ == '__main__':
-    app = CharacterCreatorApp
+
+def main():
+    app = CharacterCreatorApp()
     app.run()
 
-HEJ ANTON :D (test) part 2
+
+if __name__ == '__main__':
+    main()
+

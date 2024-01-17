@@ -5,14 +5,18 @@ import tkinter as tk
 
 
 class CharacterCreatorApp:
+
     def __init__(self):
+        index = 0
         self.root = tk.Tk()
         self.character = Character()
         self.wheelSpinner = WheelSpinner()
         self.gui = GUIController(self.root)
+        # self.character.updateAttribute(self, index, self.wheelSpinner.spin())
 
-        # Setup interactions
         pass
 
     def run(self):
         self.root.mainloop()
+
+
