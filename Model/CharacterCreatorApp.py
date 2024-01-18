@@ -9,9 +9,9 @@ class CharacterCreatorApp:
     def __init__(self):
         index = 0
         self.root = tk.Tk()
-        self.character = Character()
-        self.wheelSpinner = WheelSpinner()
-        self.gui = GUIController(self.root)
+        # self.character = Character()
+        # self.wheelSpinner = WheelSpinner()
+        self.gui = GUIController()
         # self.character.updateAttribute(self, index, self.wheelSpinner.spin())
 
         pass

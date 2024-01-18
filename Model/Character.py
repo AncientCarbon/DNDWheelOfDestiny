@@ -1,13 +1,11 @@
-from Model import WheelSpinner
-
-aasdlfkj
+from Model.WheelSpinner import WheelSpinner
 
 
-class Character;
+class Character:
     wheel = WheelSpinner
 
     def __init__(self):
-        race = wheel.spin()
+        race = self.wheel.spin()
         pass
 
     def assignAttribute(self):
