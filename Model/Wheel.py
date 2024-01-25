@@ -1,13 +1,14 @@
-import numpy as np
-import tkinter as tk
-
-
 class Wheel:
-    def __init__(self, canvas, descriptions, root):
+    def __init__(self, canvas, descriptions, root, angle, color):
         """
-        :param canvas: canvas object to draw on.
-        :param descriptions: An array of strings containing information about the field.
+
+        :param canvas: Tkinter canvas to draw wheel on
+        :param descriptions: String of descriptions to go on the wheel
+        :param root: Tkinter root
+        :param angle: The angle it should be rotated to during the spin
         """
+        self.color = color
+        self.angle = angle
         self.root = root
         self.canvas = canvas
         self.sections = len(descriptions)
@@ -22,16 +23,13 @@ class Wheel:
         x0, y0, x1, y1 = 30, 30, 570, 570
         center = 300
         self.canvas.create_oval(x0, y0, x1, y1, fill="white")
-        colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"]
-
-        color = colors[np.random.randint(len(colors))]
 
         for i in range(self.sections):
-            startAngle = anglePerSection * i
+            startAngle = anglePerSection * i + self.angle
             self.canvas.create_arc(x0, y0, x1, y1,
                                    start=startAngle,
                                    extent=anglePerSection,
-                                   fill=self.getColorBrightness(color, i),
+                                   fill=self.getColorBrightness(self.color, i),
                                    outline="black")
 
         self.canvas.create_oval(center - 85, center - 85, center + 85, center + 85, fill="white")
