@@ -42,6 +42,8 @@ class GUIController:
         self.spinButton = tk.Button(self.root, text="Spin", command=self.spinWheel)
         self.spinButton.pack()
 
+        self.drawArrow()
+
     def update(self):
         # TODO: Update
         pass
@@ -70,6 +72,7 @@ class GUIController:
             self.angleRotated += self.anglePerFrame
 
             self.root.after(10, self.rotateWheel)
+            self.drawArrow()
 
     def resetWheel(self):
         self.canvas.delete("all")
@@ -78,3 +81,16 @@ class GUIController:
         self.color = None
         self.angleRotated = None
         self.angle = 0
+
+    def drawArrow(self):
+        arrowLength = 50
+        arrowWidth = 20
+        centerX = 300
+        centerY = 50
+        points = [
+            centerX + arrowWidth // 2, centerY - arrowLength,
+            centerX - arrowWidth // 2, centerY - arrowLength,
+            centerX, centerY
+        ]
+        self.canvas.create_polygon(points, fill="red", outline="white")
+        pass
