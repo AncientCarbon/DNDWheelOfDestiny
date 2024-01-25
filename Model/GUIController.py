@@ -17,8 +17,6 @@ class GUIController:
         self.anglePerFrame = 10
         self.color = None
         self.angleRotated = None
-        self.minRotations = None
-        self.spinSpeed = None
         self.angle = 0
         self.spinButton = None
         self.wheel = None
@@ -55,6 +53,7 @@ class GUIController:
         self.angleRotated = 0
         self.targetAngle = np.random.randint(360, 5 * 360)
         self.rotateWheel()
+        # TODO: Pop-up with result
 
     def rotateWheel(self):
         if self.angleRotated > self.targetAngle:
@@ -71,3 +70,11 @@ class GUIController:
             self.angleRotated += self.anglePerFrame
 
             self.root.after(10, self.rotateWheel)
+
+    def resetWheel(self):
+        self.canvas.delete("all")
+        self.targetAngle = None
+        self.anglePerFrame = 10
+        self.color = None
+        self.angleRotated = None
+        self.angle = 0
