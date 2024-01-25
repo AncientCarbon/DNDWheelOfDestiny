@@ -1,6 +1,7 @@
 import numpy as np
 import tkinter as tk
 
+
 class Wheel:
     def __init__(self, canvas, descriptions, root):
         """
@@ -21,7 +22,7 @@ class Wheel:
         x0, y0, x1, y1 = 30, 30, 570, 570
         center = 300
         self.canvas.create_oval(x0, y0, x1, y1, fill="white")
-        colors = ["red", "blue", "green", "yellow"]
+        colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"]
 
         color = colors[np.random.randint(len(colors))]
 
@@ -39,20 +40,23 @@ class Wheel:
         rgb = self.tkColorToRgb(color)
         totalSections = self.sections - 1
         midSection = (totalSections / 2)
-        minRgbValue = 30
-
-        if sectionNr < midSection:
-            scale = sectionNr / midSection * 0.9
-            newRgb = [max(int(value * scale), minRgbValue) for value in rgb]
-
-        elif sectionNr == midSection:
-            newRgb = rgb
+        if sectionNr <= midSection:
+            darkestColor = self.getDarkestColor(rgb)
+            diff = [o - d for o, d in zip(rgb, darkestColor)]
+            scale = (midSection - sectionNr) / midSection
+            newRgb = [int(o - d * scale) for o, d in zip(rgb, diff)]
 
         else:
             scale = (sectionNr - midSection) / midSection
             newRgb = [int(value + (255 - value) * scale) for value in rgb]
 
         return self.rgbToHex(newRgb)
+
+    def getDarkestColor(self, rgb):
+        high = max(range(len(rgb)), key=lambda i: rgb[i])
+        darkest_rgb = [0, 0, 0]
+        darkest_rgb[high] = 30
+        return darkest_rgb
 
     def tkColorToRgb(self, color):
         rgb = self.root.winfo_rgb(color)
