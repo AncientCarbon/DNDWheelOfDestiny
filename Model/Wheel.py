@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Wheel:
     def __init__(self, canvas, descriptions, root, angle, color):
         """
@@ -21,18 +24,28 @@ class Wheel:
         """
         anglePerSection = 360 / self.sections
         x0, y0, x1, y1 = 30, 30, 570, 570
-        center = 300
+        radius = 250
+        centerX, centerY = 300, 300
         self.canvas.create_oval(x0, y0, x1, y1, fill="white")
 
-        for i in range(self.sections):
+        for i, description in enumerate(self.descriptions):
             startAngle = anglePerSection * i + self.angle
+            txtStartAngle = anglePerSection * i - self.angle
             self.canvas.create_arc(x0, y0, x1, y1,
                                    start=startAngle,
                                    extent=anglePerSection,
                                    fill=self.getColorBrightness(self.color, i),
                                    outline="black")
+            midpointAngle = (txtStartAngle + (anglePerSection / 2)) % 360
+            angle_rad = np.radians(midpointAngle)
+            textX = centerX + radius * np.cos(angle_rad)
+            textY = centerY + radius * np.sin(angle_rad)
+            self.canvas.create_text(textX, textY, text=description, font=("Arial", 14), fill="white",
+                                    angle=anglePerSection * i + startAngle)
 
-        self.canvas.create_oval(center - 85, center - 85, center + 85, center + 85, fill="white")
+        self.canvas.create_oval(centerX - 85, centerY - 85, centerX + 85, centerY + 85, fill="white")
+
+
 
     def getColorBrightness(self, color, sectionNr):
         rgb = self.tkColorToRgb(color)

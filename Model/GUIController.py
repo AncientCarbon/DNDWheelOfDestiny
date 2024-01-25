@@ -74,6 +74,9 @@ class GUIController:
             self.root.after(10, self.rotateWheel)
             self.drawArrow()
 
+        else:
+            self.calculateResult()
+
     def resetWheel(self):
         self.canvas.delete("all")
         self.targetAngle = None
@@ -93,4 +96,9 @@ class GUIController:
             centerX, centerY
         ]
         self.canvas.create_polygon(points, fill="red", outline="white")
-        pass
+
+    def calculateResult(self):
+        anglePerSection = 360 / len(self.wheelData)
+        sectionIndex = int(self.angle / anglePerSection) % len(self.wheelData)
+        selectedField = self.wheelData[sectionIndex]
+        print("Landed on field: ", selectedField)
