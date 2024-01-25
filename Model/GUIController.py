@@ -55,7 +55,6 @@ class GUIController:
         self.angleRotated = 0
         self.targetAngle = np.random.randint(360, 5 * 360)
         self.rotateWheel()
-        # TODO: Pop-up with result
 
     def rotateWheel(self):
         if self.angleRotated > self.targetAngle:
@@ -75,6 +74,7 @@ class GUIController:
             self.drawArrow()
 
         else:
+            print(self.angle)
             self.calculateResult()
 
     def resetWheel(self):
@@ -99,6 +99,7 @@ class GUIController:
 
     def calculateResult(self):
         anglePerSection = 360 / len(self.wheelData)
-        sectionIndex = int(self.angle / anglePerSection) % len(self.wheelData)
-        selectedField = self.wheelData[sectionIndex]
+        adjustedAngle = (self.angle + 90) % 360
+        sectionIndex = (int(adjustedAngle / anglePerSection)) % len(self.wheelData)
+        selectedField = self.wheelData[-sectionIndex - 1]
         print("Landed on field: ", selectedField)
