@@ -30,18 +30,20 @@ class Wheel:
 
         for i, description in enumerate(self.descriptions):
             startAngle = anglePerSection * i - self.angle
-            txtStartAngle = anglePerSection * i + self.angle
             self.canvas.create_arc(x0, y0, x1, y1,
                                    start=startAngle,
                                    extent=anglePerSection,
                                    fill=self.getColorBrightness(self.color, i),
                                    outline="black")
-            midpointAngle = (txtStartAngle + (anglePerSection / 2)) % 360
+            midpointAngle = (startAngle + (anglePerSection / 2)) % 360
             angle_rad = np.radians(midpointAngle)
             textX = centerX + radius * np.cos(angle_rad)
-            textY = centerY + radius * np.sin(angle_rad)
-            self.canvas.create_text(textX, textY, text=description, font=("Arial", 14), fill=self.getTextColor(i),
-                                    angle=anglePerSection * i + startAngle)
+            textY = centerY - radius * np.sin(angle_rad)
+            self.canvas.create_text(textX, textY,
+                                    text=description,
+                                    font=("Arial", 14),
+                                    fill=self.getTextColor(i),
+                                    angle=midpointAngle)
 
         self.canvas.create_oval(centerX - 85, centerY - 85, centerX + 85, centerY + 85, fill="white")
 
@@ -80,7 +82,6 @@ class Wheel:
         return 100 - stepChange * sectionNr
 
     def getTextColor(self, sectionNr):
-        if sectionNr < self.sections / 2:
-            return "black"
-        else:
-            return "white"
+        rgb = self.tkColorToRgb(self.getColorBrightness(self.color, sectionNr))
+        luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.144 * rgb[2]) / 255
+        return "black" if luminance > 0.5 else "white"

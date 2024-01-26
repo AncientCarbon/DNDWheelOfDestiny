@@ -74,7 +74,6 @@ class GUIController:
             self.drawArrow()
 
         else:
-            print(self.angle)
             self.calculateResult()
 
     def resetWheel(self):
@@ -101,5 +100,5 @@ class GUIController:
         anglePerSection = 360 / len(self.wheelData)
         adjustedAngle = (self.angle + 90) % 360
         sectionIndex = (int(adjustedAngle / anglePerSection)) % len(self.wheelData)
-        selectedField = self.wheelData[-sectionIndex - 1]
+        selectedField = self.wheelData[sectionIndex]
         print("Landed on field: ", selectedField)
