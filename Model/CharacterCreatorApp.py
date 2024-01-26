@@ -5,18 +5,12 @@ import tkinter as tk
 class CharacterCreatorApp:
 
     def __init__(self):
+        self.data = []
         self.root = tk.Tk()
-        num = input("Nr of sections: ")
-        try:
-            num = int(num)
-        except ValueError:
-            print("Not an int")
+        with open("Model/Strength.txt") as doc:
+            for line in doc:
+                self.data.append(line)
 
-        numberList = [str(i) for i in range(1, num+1)]
-        print(numberList)
-        self.gui = GUIController(self.root, numberList)
-
-        pass
-
-    def run(self):
+        self.gui = GUIController(self.root, self.data)
         self.root.mainloop()
+

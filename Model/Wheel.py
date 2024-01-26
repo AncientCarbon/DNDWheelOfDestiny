@@ -24,7 +24,7 @@ class Wheel:
         """
         anglePerSection = 360 / self.sections
         x0, y0, x1, y1 = 30, 30, 570, 570
-        radius = 250
+        radius = 150
         centerX, centerY = 300, 300
         self.canvas.create_oval(x0, y0, x1, y1, fill="white")
 
@@ -45,7 +45,7 @@ class Wheel:
                                     fill=self.getTextColor(i),
                                     angle=midpointAngle)
 
-        self.canvas.create_oval(centerX - 85, centerY - 85, centerX + 85, centerY + 85, fill="white")
+        self.canvas.create_oval(centerX - 50, centerY - 50, centerX + 50, centerY + 50, fill="white")
 
     def getColorBrightness(self, color, sectionNr):
         rgb = self.tkColorToRgb(color)
