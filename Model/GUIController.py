@@ -28,10 +28,10 @@ class GUIController:
         self.setupWidgets()
 
     def setupWidgets(self):
-        label = tk.Label(self.root, text="Let the wheel decide your destiny!")
+        label = tk.Label(self.root, text="Let the wheel decide your destiny!", font=('Arial', 18))
         characterDisplay = tk.Label(self.root, textvariable=self.characterInfo)
 
-        label.pack()
+        label.pack(padx=20, pady=20)
         characterDisplay.pack()
 
         self.canvas = tk.Canvas(self.root, width=600, height=600)
@@ -40,7 +40,7 @@ class GUIController:
         self.color = colors[np.random.randint(len(colors))]
         self.wheel = Wheel(self.canvas, self.wheelData, self.root, self.angle, self.color)
         self.spinButton = tk.Button(self.root, text="Spin", command=self.spinWheel)
-        self.spinButton.pack()
+        self.spinButton.pack(padx=20, pady=20)
 
         self.drawArrow()
 
