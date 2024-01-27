@@ -23,9 +23,8 @@ def getWheelData(spinType):
 class GUIController:
     def __init__(self, root):
         """
-
-        :param root: the Tkinter root.
-        :param wheelData: The array of strings used as options on the wheel.
+        The brains of the operation
+        :param root: The tk.Tk() root object
         """
         self.spinTypeLabel = None
         self.colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"]
