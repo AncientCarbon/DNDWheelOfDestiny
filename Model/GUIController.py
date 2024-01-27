@@ -13,6 +13,7 @@ class GUIController:
         :param root: the Tkinter root.
         :param wheelData: The array of strings used as options on the wheel.
         """
+        self.spinTypeLabel = None
         self.colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"]
         self.spinCount = 0
         self.targetAngle = None
@@ -32,6 +33,8 @@ class GUIController:
     def setupWidgets(self):
         label = tk.Label(self.root, text="Let the wheel decide your destiny!", font=('Arial', 18))
         label.pack(padx=20, pady=20)
+        self.spinTypeLabel = tk.Label(self.root, text=self.getSpinType(), font=('Arial', 14))
+        self.spinTypeLabel.pack()
 
         self.canvas = tk.Canvas(self.root, width=600, height=600)
         self.canvas.pack()
@@ -42,6 +45,7 @@ class GUIController:
         self.drawArrow()
 
     def spinWheel(self):
+        self.spinTypeLabel.config(text=self.getSpinType())
 
         # Picks a random color from the colors list
         self.color = self.colors[np.random.randint(len(self.colors))]
