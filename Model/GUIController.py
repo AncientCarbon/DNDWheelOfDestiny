@@ -77,14 +77,6 @@ class GUIController:
         else:
             self.calculateResult()
 
-    def resetWheel(self):
-        self.canvas.delete("all")
-        self.targetAngle = None
-        self.anglePerFrame = 10
-        self.color = None
-        self.angleRotated = None
-        self.angle = 0
-
     def drawArrow(self):
         arrowLength = 50
         arrowWidth = 20
