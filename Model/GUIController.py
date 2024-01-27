@@ -6,6 +6,20 @@ from Model.Wheel import Wheel
 from Model.SpinTypesEnum import SpinTypes
 
 
+def getWheelData(spinType):
+    fileName = spinType
+    filePath = f"Model/SpinTypes/{fileName}"
+    fileData = []
+    try:
+        with open(filePath) as file:
+            for line in file:
+                fileData.append(line.strip())
+        return fileData
+    except FileNotFoundError:
+        print(f"File not found: {filePath}")
+    pass
+
+
 class GUIController:
     def __init__(self, root):
         """
@@ -35,23 +49,25 @@ class GUIController:
         label.pack(padx=20, pady=20)
         self.spinTypeLabel = tk.Label(self.root, text=self.getSpinType(), font=('Arial', 14))
         self.spinTypeLabel.pack()
-
         self.canvas = tk.Canvas(self.root, width=600, height=600)
         self.canvas.pack()
-        self.wheel = Wheel.genericWheel(self.canvas)
+
+        self.wheelData = getWheelData(self.getSpinType())
+        self.color = self.colors[np.random.randint(len(self.colors))]
+        self.wheel = Wheel(self.canvas, self.wheelData, self.root, self.angle, self.color)
 
         self.spinButton = tk.Button(self.root, text="Spin", command=self.spinWheel)
         self.spinButton.pack(padx=20, pady=20)
         self.drawArrow()
 
     def spinWheel(self):
+        if not self.spinCount == 0:
+            self.color = self.colors[np.random.randint(len(self.colors))]
+
         self.spinButton.config(state='disabled')
         self.spinTypeLabel.config(text=self.getSpinType())
 
-        # Picks a random color from the colors list
-        self.color = self.colors[np.random.randint(len(self.colors))]
-
-        self.wheelData = self.getWheelData(self.getSpinType())
+        self.wheelData = getWheelData(self.getSpinType())
 
         self.wheel = Wheel(self.canvas, self.wheelData, self.root, self.angle, self.color)
         # Resets the wheel
@@ -112,17 +128,3 @@ class GUIController:
         # TODO: Make pop-up to show that the character is done
         # TODO: Show the final stats and make them easy to copy
         self.spinCount = 0
-
-    def getWheelData(self, spinType):
-        fileName = spinType
-        filePath = f"Model/SpinTypes/{fileName}"
-        fileData = []
-        try:
-            with open(filePath) as file:
-                for line in file:
-                    fileData.append(line.strip())
-            return fileData
-        except FileNotFoundError:
-            print(f"File not found: {filePath}")
-        pass
-

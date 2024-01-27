@@ -1,6 +1,17 @@
 import numpy as np
 
 
+def rgbToHex(rgb):
+    return f'#{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}'
+
+
+def getDarkestColor(rgb):
+    high = max(range(len(rgb)), key=lambda i: rgb[i])
+    darkest_rgb = [0, 0, 0]
+    darkest_rgb[high] = 30
+    return darkest_rgb
+
+
 class Wheel:
     def __init__(self, canvas, descriptions, root, angle, color):
         """
@@ -52,7 +63,7 @@ class Wheel:
         totalSections = self.sections - 1
         midSection = (totalSections / 2)
         if sectionNr <= midSection:
-            darkestColor = self.getDarkestColor(rgb)
+            darkestColor = getDarkestColor(rgb)
             diff = [o - d for o, d in zip(rgb, darkestColor)]
             scale = (midSection - sectionNr) / midSection
             newRgb = [int(o - d * scale) for o, d in zip(rgb, diff)]
@@ -61,20 +72,11 @@ class Wheel:
             scale = (sectionNr - midSection) / midSection
             newRgb = [int(value + (255 - value) * scale) for value in rgb]
 
-        return self.rgbToHex(newRgb)
-
-    def getDarkestColor(self, rgb):
-        high = max(range(len(rgb)), key=lambda i: rgb[i])
-        darkest_rgb = [0, 0, 0]
-        darkest_rgb[high] = 30
-        return darkest_rgb
+        return rgbToHex(newRgb)
 
     def tkColorToRgb(self, color):
         rgb = self.root.winfo_rgb(color)
         return [int(x / 256) for x in rgb]
-
-    def rgbToHex(self, rgb):
-        return f'#{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}'
 
     def getPercentage(self, sectionNr):
         minimumIntensity = 10
@@ -85,11 +87,3 @@ class Wheel:
         rgb = self.tkColorToRgb(self.getColorBrightness(self.color, sectionNr))
         luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.144 * rgb[2]) / 255
         return "black" if luminance > 0.5 else "white"
-
-    @classmethod
-    def genericWheel(cls, canvas):
-        x0, y0, x1, y1 = 30, 30, 570, 570
-        centerX, centerY = 300, 300
-        canvas.create_oval(x0, y0, x1, y1, fill="white")
-        canvas.create_text(centerX, centerY, text="Press spin!", font=('Arial', 20), fill="black")
-        pass
