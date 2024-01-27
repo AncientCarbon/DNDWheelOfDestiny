@@ -91,5 +91,5 @@ class Wheel:
         x0, y0, x1, y1 = 30, 30, 570, 570
         centerX, centerY = 300, 300
         canvas.create_oval(x0, y0, x1, y1, fill="white")
-        canvas.create_text(centerX, centerY, text="Press spin!", fill="black")
+        canvas.create_text(centerX, centerY, text="Press spin!", font=('Arial', 20), fill="black")
         pass

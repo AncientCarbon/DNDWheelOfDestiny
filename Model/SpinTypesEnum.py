@@ -10,7 +10,7 @@ class SpinTypes(Enum):
     SIZE = 5
     AGE = 6
     RIZZ = 7
-    ANXIETY = 8
+    ANXIETY_LEVEL = 8
     CAVEMANNESS = 9
     WEAPON = 10
     INNATE_ABILITY = 11

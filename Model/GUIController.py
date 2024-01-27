@@ -20,7 +20,7 @@ class GUIController:
         self.anglePerFrame = 10
         self.color = None
         self.angleRotated = None
-        self.angle = 0
+        self.angle = np.random.randint(0, 359)
         self.spinButton = None
         self.wheel = None
         self.canvas = None
