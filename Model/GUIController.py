@@ -45,6 +45,7 @@ class GUIController:
         self.drawArrow()
 
     def spinWheel(self):
+        self.spinButton.config(state='disabled')
         self.spinTypeLabel.config(text=self.getSpinType())
 
         # Picks a random color from the colors list
@@ -101,13 +102,16 @@ class GUIController:
         spinType = self.getSpinType()
         print(spinType, ":", selectedField)
         self.spinCount += 1
+        self.spinButton.config(state='normal')
 
     def getSpinType(self):
         for spinType in SpinTypes:
             if spinType.value == self.spinCount:
                 return spinType.name.capitalize()
 
-        return ["Error1", "Error2", "Error3"]
+        # TODO: Make pop-up to show that the character is done
+        # TODO: Show the final stats and make them easy to copy
+        self.spinCount = 0
 
     def getWheelData(self, spinType):
         fileName = spinType
