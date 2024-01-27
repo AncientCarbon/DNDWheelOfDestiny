@@ -85,3 +85,11 @@ class Wheel:
         rgb = self.tkColorToRgb(self.getColorBrightness(self.color, sectionNr))
         luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.144 * rgb[2]) / 255
         return "black" if luminance > 0.5 else "white"
+
+    @classmethod
+    def genericWheel(cls, canvas):
+        x0, y0, x1, y1 = 30, 30, 570, 570
+        centerX, centerY = 300, 300
+        canvas.create_oval(x0, y0, x1, y1, fill="white")
+        canvas.create_text(centerX, centerY, text="Press spin!", fill="black")
+        pass

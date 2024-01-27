@@ -24,7 +24,6 @@ class GUIController:
         self.spinButton = None
         self.wheel = None
         self.canvas = None
-        self.characterInfo = None
         self.root = root
         self.root.title("D&D Wheel of Destiny")
         self.wheelData = None
@@ -32,25 +31,15 @@ class GUIController:
 
     def setupWidgets(self):
         label = tk.Label(self.root, text="Let the wheel decide your destiny!", font=('Arial', 18))
-        characterDisplay = tk.Label(self.root, textvariable=self.characterInfo)
-
         label.pack(padx=20, pady=20)
-        characterDisplay.pack()
 
         self.canvas = tk.Canvas(self.root, width=600, height=600)
         self.canvas.pack()
+        self.wheel = Wheel.genericWheel(self.canvas)
 
         self.spinButton = tk.Button(self.root, text="Spin", command=self.spinWheel)
         self.spinButton.pack(padx=20, pady=20)
-
         self.drawArrow()
-
-    def update(self):
-        # TODO: Update
-        pass
-
-    def onCreateCharacter(self):
-        self.characterInfo.set("Character created. (placeholder)")
 
     def spinWheel(self):
 
